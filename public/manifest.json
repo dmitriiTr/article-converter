@@ -1,0 +1,11 @@
+{
+    "name": "Article Converter",
+    "description": "Download articles from websites",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "permissions": ["storage", "activeTab", "scripting", "downloads"],
+    "action": {
+      "default_popup": "index.html"
+    },
+    "host_permissions": ["<all_urls>"]
+}

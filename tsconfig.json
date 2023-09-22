@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "removeComments": true,
+        "strictNullChecks": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": false,
+        "noImplicitAny": true,
+        "noUnusedParameters": true,
+        "strictPropertyInitialization": true,
+        "noUnusedLocals": true,
+        "forceConsistentCasingInFileNames": true,
+        "noUncheckedIndexedAccess": true,
+        "target": "es5",
+        "lib": [
+            "dom",
+            "ES2015"
+        ],
+        "jsx": "react",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "allowJs": false,
+        "sourceMap": true,
+        "baseUrl": ".",
+        "outDir": "public"
+    },
+    "compileOnSave": true,
+    "include": [
+        "script.ts"
+    ]
+}
