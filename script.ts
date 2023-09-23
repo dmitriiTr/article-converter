@@ -14,7 +14,7 @@ downloadElement?.addEventListener('click', async () => {
 	}
 });
 
-const downloadArticle = () => chrome.storage.sync.get('selectors', ({ selectors: selectors }) => {
+const downloadArticle = () => chrome.storage.sync.get('selectors').then(({ selectors: selectors }) => {
 	(selectors as string).split(' ').forEach(selector =>
 		document.querySelectorAll(selector).forEach(element => element.remove()));
 
