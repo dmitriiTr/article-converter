@@ -10,7 +10,7 @@ module.exports = {
 		"@typescript-eslint/naming-convention": 1,
 		"semi": 1,
 		"eqeqeq": 1,
-		"@typescript-eslint/indent": [1, "tab"],
+		"indent": [1, 2],
 		"no-debugger": 1,
 		"@typescript-eslint/quotes": [1, "single"],
 		"no-trailing-spaces": 1,
@@ -22,6 +22,7 @@ module.exports = {
 			1,
 			"expression",
 			{ "allowArrowFunctions": true }
-		]
+		],
+		"max-len": 1
 	}
 };
