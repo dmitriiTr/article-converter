@@ -1,3 +1,8 @@
+type ArticleData = {
+	content: string;
+	title: string;
+}
+
 const downloadElement = document.getElementById('download');
 
 downloadElement?.addEventListener('click', async () => {
@@ -18,9 +23,13 @@ const downloadArticle = () => chrome.storage.sync.get('selectors').then(({ selec
 	(selectors as string).split(' ').forEach(selector =>
 		document.querySelectorAll(selector).forEach(element => element.remove()));
 
-	chrome.runtime.sendMessage(document.documentElement.outerHTML);
+	chrome.runtime.sendMessage<ArticleData>({ content: document.documentElement.outerHTML, title: document.title });
 });
 
-chrome.runtime.onMessage.addListener(documentAsHtml =>
-	chrome.downloads.download({ url: URL.createObjectURL(new Blob([documentAsHtml], { type: 'text/html' })) })
+chrome.runtime.onMessage.addListener((articleData: ArticleData) =>
+	chrome.downloads.download({
+		url: URL.createObjectURL(new Blob([articleData.content], { type: 'text/html' })),
+		filename: articleData.title + '.html',
+		saveAs: true
+	})
 );
