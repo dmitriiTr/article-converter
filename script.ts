@@ -3,6 +3,42 @@ type ArticleData = {
   title: string;
 }
 
+type FiltersForUrl = {
+  commonSelectors: string;
+  filters: [{
+    url: string,
+    selectors: string
+  }];
+}
+
+const xhr = new XMLHttpRequest();
+xhr.onload = async () => {
+  if (xhr.status === 200) {
+    const response = xhr.response as string;
+    const filters = JSON.parse(response) as FiltersForUrl;
+
+    const input = document.querySelector<HTMLInputElement>('#selectors');
+    if (input) {
+
+      const [tab] = await chrome.tabs.query(
+        { active: true, currentWindow: true });
+      const tabId = tab?.id;
+
+      if (tabId) {
+        const url = tab.url || '';
+        const selectors = filters.filters
+          .filter(f => url.includes(f.url))[0]?.selectors;
+
+        input.value =
+          `${filters.commonSelectors}${selectors ? ' ' + selectors : ''}`;
+      }
+    }
+
+  }
+};
+xhr.open('GET', chrome.runtime.getURL('./filters.json'), true);
+xhr.send();
+
 const downloadElement = document.getElementById('download');
 
 downloadElement?.addEventListener('click', async () => {
@@ -36,7 +72,7 @@ chrome.runtime.onMessage.addListener((articleData: ArticleData) =>
     url: URL.createObjectURL(
       new Blob([articleData.content], { type: 'text/html' })
     ),
-    filename: articleData.title + '.html',
+    filename: 'article' + '.html',
     saveAs: true
   })
 );

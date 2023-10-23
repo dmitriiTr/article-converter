@@ -1,0 +1,15 @@
+{
+    "commonSelectors": [
+        "script meta link style input svg"
+    ],
+    "filters": [
+        {
+            "url": "plato.stanford",
+            "selectors": "#header-wrapper #footer #article-sidebar"
+        },
+        {
+            "url": "anylang.net",
+            "selectors": ".top_panel .toc_panel"
+        }
+    ]
+}
